@@ -1,4 +1,4 @@
-Alloy + Widget + Jade Boilerplate
+Alloy + Widget + Jade
 ========================================
 
 ## If you don't already have jade installed:
