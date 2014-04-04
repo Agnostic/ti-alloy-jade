@@ -1,6 +1,1 @@
-
-<Alloy>
-  <Window class="container">
-    <Require type="widget" src="my_widget"></Require>
-  </Window>
-</Alloy>
+<!-- This file must exists to build -->
