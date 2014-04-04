@@ -1,7 +1,7 @@
 Alloy + Widget + Jade
 ========================================
 
-## If you don't already have jade installed:
+### If you don't already have jade installed:
 
 ```bash
 sudo npm install -g jade
