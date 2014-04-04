@@ -1,0 +1,1 @@
+module.exports={"dependencies":{"my_widget":"1.0"}};

@@ -1,0 +1,42 @@
+// Pre compile
+task("pre:compile", function(event,logger) {
+  var wrench            = require("wrench"),
+  fs                    = require("fs"),
+  jade                  = require("jade"),
+  view_root             = event.dir.project,
+  path                  = require("path");
+
+  event.alloyConfig.xml = [];
+
+  wrench.readdirSyncRecursive(view_root).forEach(function(view) {
+    if (view.match(/.jade$/)
+        && view.indexOf('templates') === -1
+        && view.indexOf('includes') === -1) {
+      event.alloyConfig.xml.push(view.replace(/\.jade$/, ".xml"));
+      try {
+        fs.writeFileSync(
+          path.join(view_root,view.replace(/\.jade$/, ".xml")),
+          jade.compile(fs.readFileSync(path.join(view_root,view)).toString(),
+                       {filename: path.join(view_root, view),
+                        pretty: true})(event));
+      } catch(e) {
+        logger.error("ERROR: " + view + "\n" + JSON.stringify(e));
+        process.exit(1);
+      }
+    }
+  });
+});
+
+// Remove generated xml files except index.xml
+// (Titanium build checks for this file to compile)
+task("post:compile",function(event,logger){
+  var fs    = require("fs"),
+  view_root = event.dir.project,
+  path      = require("path");
+
+  event.alloyConfig.xml.forEach(function(view){
+    if (!view.match(/index.xml/g)) {
+      fs.unlinkSync(path.join(view_root, view));
+    }
+  });
+});
