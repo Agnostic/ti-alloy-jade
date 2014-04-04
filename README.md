@@ -22,4 +22,5 @@ Deploying to Device:
 $ titanium build -p android -T device
 ```
 
+Jade documentation:
 http://jade-lang.com/
